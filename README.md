@@ -10,39 +10,39 @@ python3 -m pip install --upgrade localstack
 python3 -m pip install awscli awscli-local
 
 localstack --version
-# 2.3.2
+# 3.0.0
 
 aws --version
-# aws-cli/1.30.0 Python/3.10.12 Linux/6.2.0-36-generic botocore/1.32.0
-
-```
-
-```
-source venv/bin/activate
-git clone https://github.com/localstack/localstack-demo.git
-cd localstack-demo
-make deploy
+# aws-cli/1.30.4 Python/3.10.12 Linux/6.2.0-36-generic botocore/1.32.4
 ```
 
 ```
 source venv/bin/activate
 
 localstack start
-# ...
-#  💻 LocalStack CLI 2.3.2
-# 
-# [11:54:57] starting LocalStack in Docker mode 🐳                                                                                                                                                   localstack.py:495
-# 2023-11-15T11:54:57.786  WARN --- [  MainThread] l.utils.docker_utils       : Unexpected error when attempting to determine container port status: ('Docker process returned with errorcode 125', b'', b'docker: Error response from daemon: driver failed programming external connectivity on endpoint laughing_napier (7ef2c92d4a58e8b451569d7d7de20e83f51613ddbc718df176065bb9824fae2e): Error starting userland proxy: listen tcp4 0.0.0.0:53: bind: address already in use.\n')
-# ────────────────────────────────────────────────────────────────────────────────── LocalStack Runtime Log (press CTRL-C to quit) ───────────────────────────────────────────────────────────────────────────────────
-# 
-# LocalStack version: 2.3.3.dev
-# LocalStack Docker container id: cc3245c3e34b
-# LocalStack build date: 2023-11-15
-# LocalStack build git hash: 10940eb0
-# 
-# 2023-11-15T10:54:59.988  INFO --- [-functhread6] hypercorn.error            : Running on https://0.0.0.0:4566 (CTRL + C to quit)
-# 2023-11-15T10:54:59.988  INFO --- [-functhread6] hypercorn.error            : Running on https://0.0.0.0:4566 (CTRL + C to quit)
-# Ready.
+
+localstack start
+
+     __                     _______ __             __
+    / /   ____  _________ _/ / ___// /_____ ______/ /__
+   / /   / __ \/ ___/ __ `/ /\__ \/ __/ __ `/ ___/ //_/
+  / /___/ /_/ / /__/ /_/ / /___/ / /_/ /_/ / /__/ ,<
+ /_____/\____/\___/\__,_/_//____/\__/\__,_/\___/_/|_|
+
+ 💻 LocalStack CLI 3.0.0
+
+[13:59:59] starting LocalStack in Docker mode 🐳                                                                                                                                                   localstack.py:495
+────────────────────────────────────────────────────────────────────────────────── LocalStack Runtime Log (press CTRL-C to quit) ───────────────────────────────────────────────────────────────────────────────────
+
+LocalStack version: 2.3.3.dev
+LocalStack Docker container id: 8d7420ab8a95
+LocalStack build date: 2023-11-15
+LocalStack build git hash: 10940eb0
+
+2023-11-21T13:00:02.474  INFO --- [-functhread6] hypercorn.error            : Running on https://0.0.0.0:4566 (CTRL + C to quit)
+2023-11-21T13:00:02.474  INFO --- [-functhread6] hypercorn.error            : Running on https://0.0.0.0:4566 (CTRL + C to quit)
+2023-11-21T13:00:02.562  INFO --- [  MainThread] localstack.utils.bootstrap : Execution of "start_runtime_components" took 602.12ms
+Ready.
 ```
 
 ```
@@ -55,5 +55,23 @@ awslocal s3 ls s3://archive-bucket/
 
 ```
 source venv/bin/activate
+git clone https://github.com/localstack/localstack-demo.git
+cd localstack-demo
+make deploy
+```
+
+
+```
+source venv/bin/activate
 localstack stop
 ```
+
+
+# Note
+
+As of https://github.com/localstack/serverless-localstack/issues/125: in `serverless.yml`, replace `host: http://127.0.0.1` with `host: 127.0.0.1`. This should solve 
+```
+-------- Deployment Bucket Error --------
+Inaccessible host: `127.0.0.1' at port `4566'. This service may not be available in the `us-east-1' region.
+```
+
