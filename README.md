@@ -65,13 +65,3 @@ make deploy
 source venv/bin/activate
 localstack stop
 ```
-
-
-# Note
-
-As of https://github.com/localstack/serverless-localstack/issues/125: in `serverless.yml`, replace `host: http://127.0.0.1` with `host: 127.0.0.1`. This should solve 
-```
--------- Deployment Bucket Error --------
-Inaccessible host: `127.0.0.1' at port `4566'. This service may not be available in the `us-east-1' region.
-```
-
