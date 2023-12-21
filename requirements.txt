@@ -1,0 +1,4 @@
+zarr
+numpy
+ome-zarr
+s3fs
