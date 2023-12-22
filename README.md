@@ -33,7 +33,7 @@ awslocal s3 ls s3://archive-bucket/
 
 ## Run a simple test for zarr
 
-The `test_zarr.py` script makes three steps:
+The `test_zarr_from_local_fs.py` script makes three steps:
 1. creates an HCS zarr file 
 2. push the zarr to an s3 bucket
 3. read a zarr slice from the s3 bucket
@@ -42,5 +42,15 @@ The `test_zarr.py` script makes three steps:
 ```bash
 source venv/bin/activate
 pip install -r requirements.txt
-python test_zarr.py
+python test_zarr_from_local_fs.py
 ```
+
+The `test_zarr_s3.py` script creates the zarr file in an s3 bucket and then read a slice. 
+
+### Spoiler alert
+
+Writing a file on localfs seems to be faster than creating the zarron s3 bucket. Creating it locally shows an elapsed time ~100 times faster than creating it on s3
+
+Elapsed time for writing on localfs:  0.03611588500007201 sec
+
+Elapsed time for writing on s3:  3.326315969999996 sec

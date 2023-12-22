@@ -2,7 +2,7 @@ import zarr
 import string
 from numpy import ones
 import subprocess
-
+import time
 from ome_zarr.writer import write_image
 from ome_zarr.writer import write_plate_metadata
 from ome_zarr.writer import write_well_metadata
@@ -44,9 +44,14 @@ def write_HCS_plate(
             image = well.require_group(str(field))
             write_image(ones((1, 1, 1, 256, 256)), image)
     print(f"Created a zarr file here: {file_path}")
+    
+
+start_time_write = time.perf_counter()
 write_HCS_plate(local_path)
+end_time_write = time.perf_counter()
+elapsed_time_write = end_time_write - start_time_write
 
-
+print("Elapsed time for writing on localfs: ", elapsed_time_write)
 
 
 # # copy file to s3
@@ -58,12 +63,20 @@ p.wait()
 
 # read zarr
 import zarr
-fs = s3fs.S3FileSystem()
-store = zarr.open(s3fs.S3Map(s3_path, s3=fs))
+fs = s3fs.S3FileSystem(anon=True,
+                       client_kwargs=dict(region_name='us-west-1'))
+store = s3fs.S3Map(root=s3_path, s3=fs)
+root = zarr.group(store=store)
+
+### if LRU, the second access is fastest
 # cache = zarr.LRUStoreCache(store, max_size=2**28)
 # root = zarr.group(store=cache)
-print(f"Read from s3: \n {store.get('A/2/0/0')[:]}")
+start_time_read = time.perf_counter()
+print(f"Read from s3: \n {root.get('A/2/0/0')[:]}")
+end_time_read = time.perf_counter()
+elapsed_time_read = end_time_read - start_time_read
 
+print("Elapsed time for reading: ", elapsed_time_read)
 
 # read file from s3 not working
 # viewer = napari.Viewer()
