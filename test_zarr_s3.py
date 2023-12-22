@@ -52,6 +52,11 @@ fs = s3fs.S3FileSystem(anon=True,
                        client_kwargs=dict(region_name='us-west-1'))
 store = s3fs.S3Map(root=s3_path, s3=fs)
 root = zarr.group(store=store)
+
+### if LRU, the second access is fastest
+# cache = zarr.LRUStoreCache(store, max_size=2**28)
+# root = zarr.group(store=cache)
+
 print(f"Read: \n {root.get('A/2/0/0')[:]}\n")
 
 

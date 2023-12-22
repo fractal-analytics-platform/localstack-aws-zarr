@@ -60,6 +60,8 @@ p.wait()
 import zarr
 fs = s3fs.S3FileSystem()
 store = zarr.open(s3fs.S3Map(s3_path, s3=fs))
+# cache = zarr.LRUStoreCache(store, max_size=2**28)
+# root = zarr.group(store=cache)
 print(f"Read from s3: \n {store.get('A/2/0/0')[:]}")
 
 
