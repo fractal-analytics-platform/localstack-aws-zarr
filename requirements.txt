@@ -2,3 +2,5 @@ zarr
 numpy
 ome-zarr
 s3fs
+napari-ome-zarr
+napari[all]
