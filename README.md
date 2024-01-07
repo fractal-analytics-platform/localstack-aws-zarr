@@ -1,15 +1,12 @@
 # localstack-aws-zarr
 Tests with localstack, aws and zarr I/O
 
-Deploy localastack using docker:
-
+Deploy localstack using docker:
 ```bash
 docker compose up -d
 ```
 
-
-Install awscli and awscli-local (wrapper of awscli)
-
+Install `awscli` and `awscli-local` (wrapper of `awscli`)
 ```bash
 python3 -m venv venv
 source venv/bin/activate
@@ -19,7 +16,6 @@ python3 -m pip install awscli awscli-local
 ```
 
 Create and list s3 buckets
-
 ```bash
 source venv/bin/activate
 awslocal s3 mb s3://archive-bucket/
@@ -49,7 +45,7 @@ The `test_zarr_s3.py` script creates the zarr file in an s3 bucket and then read
 
 ### Spoiler alert
 
-Writing a file on localfs seems to be faster than creating the zarron s3 bucket. Creating it locally shows an elapsed time ~100 times faster than creating it on s3
+Writing a file on localfs seems to be faster than creating the zarr on s3 bucket. Creating it locally shows an elapsed time ~100 times faster than creating it on s3
 
 Elapsed time for writing on localfs:  0.03611588500007201 sec
 
