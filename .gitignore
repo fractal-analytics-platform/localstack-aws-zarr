@@ -1,3 +1,4 @@
 activate_venv.sh
 venv
 volume
+.*.swp

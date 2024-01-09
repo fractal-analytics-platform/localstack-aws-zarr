@@ -1,18 +1,20 @@
 # localstack-aws-zarr
-Tests with localstack, aws and zarr I/O
+
+This an experimental repository, to tests zarr I/O on s3 object-storage via localstack.
+
+
+## Setup
 
 Deploy localstack using docker:
 ```bash
 docker compose up -d
 ```
 
-Install `awscli` and `awscli-local` (wrapper of `awscli`)
+Install `awscli` and `awscli-local` (wrapper of `awscli`) in a virtual environment
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-
 python3 -m pip install awscli awscli-local
-
 ```
 
 Create and list s3 buckets
@@ -21,12 +23,25 @@ source venv/bin/activate
 awslocal s3 mb s3://archive-bucket/
 awslocal s3 cp test.txt s3://archive-bucket/
 awslocal s3 ls s3://archive-bucket/
-#                            PRE a2b95efc/
-# 2024-01-09 10:10:40          5 test.txt
+# 2024-01-09 15:29:10          5 test.txt
+```
+
+## Run simple test
+
+Instal requirements (note that only `zarr` and `dask[array]` are needed at this point) and run basic example:
+```bash
+source venv/bin/activate
+python3 -m pip install -r requirements.txt
+python3 test_zarr_s3.py 
+# Data read from S3:
+# [[1 2]
+#  [3 4]]
 ```
 
 
-## Run a simple test for zarr
+## Out-of-date: Run a simple test for zarr
+
+> WARNING: This section and the corresponding scripts must be reviewed.
 
 The `test_zarr_from_local_fs.py` script makes three steps:
 1. creates an HCS zarr file 
