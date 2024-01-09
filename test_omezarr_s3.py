@@ -13,7 +13,7 @@ os.environ["AWS_DEFAULT_REGION"] = "us-west-1"
 os.environ["AWS_ENDPOINT_URL"] = "http://localhost:4566"
 
 
-s3_path = "s3://test-bucket/test.ome.zarr"
+s3_path = "s3://archive-bucket/test.ome.zarr"
 
 
 # write file to local

@@ -18,7 +18,7 @@ os.environ['AWS_ENDPOINT_URL'] = 'http://localhost:4566'
 
 
 local_path = "test.ome.zarr"
-s3_path = "s3://test-bucket/"
+s3_path = "s3://archive-bucket/"
 
 
 # write file to local
