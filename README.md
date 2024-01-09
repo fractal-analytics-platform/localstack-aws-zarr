@@ -19,11 +19,10 @@ Create and list s3 buckets
 ```bash
 source venv/bin/activate
 awslocal s3 mb s3://archive-bucket/
-
+awslocal s3 cp test.txt s3://archive-bucket/
 awslocal s3 ls s3://archive-bucket/
 #                            PRE a2b95efc/
-# 2023-11-15 11:40:28     202151 architecture.png
-# 2023-11-15 11:40:28       6514 index.html
+# 2024-01-09 10:10:40          5 test.txt
 ```
 
 
@@ -38,10 +37,12 @@ The `test_zarr_from_local_fs.py` script makes three steps:
 ```bash
 source venv/bin/activate
 pip install -r requirements.txt
-python test_zarr_from_local_fs.py
+python test_omezarr_from_local_fs.py
 ```
 
-The `test_zarr_s3.py` script creates the zarr file in an s3 bucket and then read a slice. 
+The `test_omezarr_s3.py` script creates the zarr file in an s3 bucket and then read a slice. 
+
+The `test_zarr_s3.py` simply create a zarr file from a dask array on a s3 bucket. 
 
 ### Spoiler alert
 

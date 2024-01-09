@@ -4,3 +4,4 @@ ome-zarr
 s3fs
 napari-ome-zarr
 napari[all]
+dask[array]

@@ -48,16 +48,16 @@ def write_HCS_plate(
 
 start_time_write = time.perf_counter()
 write_HCS_plate(local_path)
-end_time_write = time.perf_counter()
-elapsed_time_write = end_time_write - start_time_write
-
-print("Elapsed time for writing on localfs: ", elapsed_time_write)
 
 
 # # copy file to s3
 print("Pushing zarr file form local fs to s3...")
 p = subprocess.Popen(f'awslocal s3 sync {local_path} {s3_path}', shell=True)
 p.wait()
+end_time_write = time.perf_counter()
+elapsed_time_write = end_time_write - start_time_write
+
+print("Elapsed time for writing on localfs: ", elapsed_time_write)
 
 # create zarr
 
