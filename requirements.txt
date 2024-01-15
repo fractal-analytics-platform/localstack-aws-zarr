@@ -1,7 +1,8 @@
 zarr
 numpy
-ome-zarr
 s3fs
-napari-ome-zarr
-napari[all]
 dask[array]
+
+# ome-zarr
+# napari-ome-zarr
+# napari[all]
