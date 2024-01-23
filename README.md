@@ -32,10 +32,19 @@ Instal requirements (note that only `zarr` and `dask[array]` are needed at this 
 ```bash
 source venv/bin/activate
 python3 -m pip install -r requirements.txt
-python3 test_zarr_s3.py 
-# Data read from S3:
-# [[1 2]
-#  [3 4]]
+python3 example_zarr_s3.py
+
+# Remove group_url='s3://archive-bucket/my_group.zarr', if it exists
+# Opened root_group=<zarr.hierarchy.Group '/'>
+# Created subgroup=<zarr.hierarchy.Group '/subgroup'>
+# Write data to group_url='s3://archive-bucket/my_group.zarr'
+# Read data from array_0_url='s3://archive-bucket/my_group.zarr/array_0'
+#   actual_data=dask.array<from-zarr, shape=(4,), dtype=int64, chunksize=(2,), chunktype=numpy.ndarray>
+#   actual_data.compute()=array([0, 0, 0, 0])
+# Write data to array_1_url='s3://archive-bucket/my_group.zarr/subgroup/array_1'
+# Read data from array_1_url='s3://archive-bucket/my_group.zarr/subgroup/array_1'
+#   actual_data=dask.array<from-zarr, shape=(4,), dtype=int64, chunksize=(2,), chunktype=numpy.ndarray>
+#   actual_data.compute()=array([1, 1, 1, 1])
 ```
 
 
