@@ -49,7 +49,7 @@ Read data from array_1_url='s3://archive-bucket/my_group.zarr/subgroup/array_1'
 or
 ```console
 $ source venv/bin/activate
-$ python example_zarr_s3_access_parent_group.py cl
+$ python example_zarr_s3_access_parent_group.py
 Remove group_url='s3://archive-bucket/my_other_group.zarr', if it exists
 Opened root_group=<zarr.hierarchy.Group '/'>, with root_group.attrs.asdict()={'level': 0}
 Opened B_subgroup=<zarr.hierarchy.Group '/B'>, with B_subgroup.attrs.asdict()={'level': 1}
