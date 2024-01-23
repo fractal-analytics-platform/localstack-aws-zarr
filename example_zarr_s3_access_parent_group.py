@@ -39,6 +39,7 @@ print(f"Opened {B_03_subgroup=}, with {B_03_subgroup.attrs.asdict()=}")
 B_03_0_subgroup = B_03_subgroup.create_group("0")
 B_03_0_subgroup.attrs.put({"level": 3})
 print(f"Opened {B_03_0_subgroup=}, with {B_03_0_subgroup.attrs.asdict()=}")
+print("-" * 80)
 
 # Extract parent group of subgroup
 B_03_0_subgroup_url = f"{group_url}/{B_03_0_subgroup.path}"
@@ -47,6 +48,7 @@ parent_url = "/".join(B_03_0_subgroup_url.split("/")[:-1])
 print(f"{parent_url=}")
 parent_group = zarr.open_group(parent_url)
 assert parent_group.attrs["level"] == 2, "Wrong group was loaded"
+print("All good")
 print("-" * 80 + "\n")
 
 
@@ -57,7 +59,7 @@ root_group = zarr.open_group(group_url)
 root_group.attrs.put({"level": 0})
 print(f"Opened {root_group=}, with {root_group.attrs.asdict()=}")
 _C_subgroup = root_group.create_group("C")
-C_subgroup = zarr.open_group(f"{group_url}/C")  
+C_subgroup = zarr.open_group(f"{group_url}/C")
 C_subgroup.attrs.put({"level": 1})
 print(f"Opened {C_subgroup=}, with {C_subgroup.attrs.asdict()=}")
 C_03_subgroup = C_subgroup.create_group("03")
@@ -66,6 +68,7 @@ print(f"Opened {C_03_subgroup=}, with {C_03_subgroup.attrs.asdict()=}")
 C_03_0_subgroup = C_03_subgroup.create_group("0")
 C_03_0_subgroup.attrs.put({"level": 3})
 print(f"Opened {C_03_0_subgroup=}, with {C_03_0_subgroup.attrs.asdict()=}")
+print("-" * 80)
 
 # Extract parent group of subgroup
 wrong_C_03_0_subgroup_url =f"{group_url}/{C_03_0_subgroup.path}"
@@ -75,4 +78,5 @@ parent_url = "/".join(C_03_0_subgroup_url.split("/")[:-1])
 print(f"{parent_url=}")
 parent_group = zarr.open_group(parent_url)
 assert parent_group.attrs["level"] == 2, "Wrong group was loaded"
+print("All good")
 print("-" * 80 + "\n")

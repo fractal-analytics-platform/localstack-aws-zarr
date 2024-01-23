@@ -49,22 +49,26 @@ Read data from array_1_url='s3://archive-bucket/my_group.zarr/subgroup/array_1'
 or
 ```console
 $ source venv/bin/activate
-$ python example_zarr_s3_access_parent_group.py
+$ python example_zarr_s3_access_parent_group.py 
 Remove group_url='s3://archive-bucket/my_other_group.zarr', if it exists
 Opened root_group=<zarr.hierarchy.Group '/'>, with root_group.attrs.asdict()={'level': 0}
 Opened B_subgroup=<zarr.hierarchy.Group '/B'>, with B_subgroup.attrs.asdict()={'level': 1}
 Opened B_03_subgroup=<zarr.hierarchy.Group '/B/03'>, with B_03_subgroup.attrs.asdict()={'level': 2}
 Opened B_03_0_subgroup=<zarr.hierarchy.Group '/B/03/0'>, with B_03_0_subgroup.attrs.asdict()={'level': 3}
+--------------------------------------------------------------------------------
 B_03_0_subgroup_url='s3://archive-bucket/my_other_group.zarr/B/03/0'
 parent_url='s3://archive-bucket/my_other_group.zarr/B/03'
+All good
 --------------------------------------------------------------------------------
 
 Opened root_group=<zarr.hierarchy.Group '/'>, with root_group.attrs.asdict()={'level': 0}
 Opened C_subgroup=<zarr.hierarchy.Group '/'>, with C_subgroup.attrs.asdict()={'level': 1}
 Opened C_03_subgroup=<zarr.hierarchy.Group '/03'>, with C_03_subgroup.attrs.asdict()={'level': 2}
 Opened C_03_0_subgroup=<zarr.hierarchy.Group '/03/0'>, with C_03_0_subgroup.attrs.asdict()={'level': 3}
+--------------------------------------------------------------------------------
 wrong_C_03_0_subgroup_url='s3://archive-bucket/my_other_group.zarr/03/0'
 parent_url='s3://archive-bucket/my_other_group.zarr/C/03'
+All good
 --------------------------------------------------------------------------------
 ```
 
