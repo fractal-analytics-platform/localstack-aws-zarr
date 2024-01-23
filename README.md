@@ -29,22 +29,43 @@ awslocal s3 ls s3://archive-bucket/
 ## Run simple test
 
 Instal requirements (note that only `zarr` and `dask[array]` are needed at this point) and run basic example:
-```bash
-source venv/bin/activate
-python3 -m pip install -r requirements.txt
-python3 example_zarr_s3.py
+```console
+$ source venv/bin/activate
+$ python3 -m pip install -r requirements.txt
+$ python3 example_zarr_s3.py
+Remove group_url='s3://archive-bucket/my_group.zarr', if it exists
+Opened root_group=<zarr.hierarchy.Group '/'>
+Created subgroup=<zarr.hierarchy.Group '/subgroup'>
+Write data to group_url='s3://archive-bucket/my_group.zarr'
+Read data from array_0_url='s3://archive-bucket/my_group.zarr/array_0'
+  actual_data=dask.array<from-zarr, shape=(4,), dtype=int64, chunksize=(2,), chunktype=numpy.ndarray>
+  actual_data.compute()=array([0, 0, 0, 0])
+Write data to array_1_url='s3://archive-bucket/my_group.zarr/subgroup/array_1'
+Read data from array_1_url='s3://archive-bucket/my_group.zarr/subgroup/array_1'
+  actual_data=dask.array<from-zarr, shape=(4,), dtype=int64, chunksize=(2,), chunktype=numpy.ndarray>
+  actual_data.compute()=array([1, 1, 1, 1])
+```
 
-# Remove group_url='s3://archive-bucket/my_group.zarr', if it exists
-# Opened root_group=<zarr.hierarchy.Group '/'>
-# Created subgroup=<zarr.hierarchy.Group '/subgroup'>
-# Write data to group_url='s3://archive-bucket/my_group.zarr'
-# Read data from array_0_url='s3://archive-bucket/my_group.zarr/array_0'
-#   actual_data=dask.array<from-zarr, shape=(4,), dtype=int64, chunksize=(2,), chunktype=numpy.ndarray>
-#   actual_data.compute()=array([0, 0, 0, 0])
-# Write data to array_1_url='s3://archive-bucket/my_group.zarr/subgroup/array_1'
-# Read data from array_1_url='s3://archive-bucket/my_group.zarr/subgroup/array_1'
-#   actual_data=dask.array<from-zarr, shape=(4,), dtype=int64, chunksize=(2,), chunktype=numpy.ndarray>
-#   actual_data.compute()=array([1, 1, 1, 1])
+or
+```console
+$ source venv/bin/activate
+$ python example_zarr_s3_access_parent_group.py cl
+Remove group_url='s3://archive-bucket/my_other_group.zarr', if it exists
+Opened root_group=<zarr.hierarchy.Group '/'>, with root_group.attrs.asdict()={'level': 0}
+Opened B_subgroup=<zarr.hierarchy.Group '/B'>, with B_subgroup.attrs.asdict()={'level': 1}
+Opened B_03_subgroup=<zarr.hierarchy.Group '/B/03'>, with B_03_subgroup.attrs.asdict()={'level': 2}
+Opened B_03_0_subgroup=<zarr.hierarchy.Group '/B/03/0'>, with B_03_0_subgroup.attrs.asdict()={'level': 3}
+B_03_0_subgroup_url='s3://archive-bucket/my_other_group.zarr/B/03/0'
+parent_url='s3://archive-bucket/my_other_group.zarr/B/03'
+--------------------------------------------------------------------------------
+
+Opened root_group=<zarr.hierarchy.Group '/'>, with root_group.attrs.asdict()={'level': 0}
+Opened C_subgroup=<zarr.hierarchy.Group '/'>, with C_subgroup.attrs.asdict()={'level': 1}
+Opened C_03_subgroup=<zarr.hierarchy.Group '/03'>, with C_03_subgroup.attrs.asdict()={'level': 2}
+Opened C_03_0_subgroup=<zarr.hierarchy.Group '/03/0'>, with C_03_0_subgroup.attrs.asdict()={'level': 3}
+wrong_C_03_0_subgroup_url='s3://archive-bucket/my_other_group.zarr/03/0'
+parent_url='s3://archive-bucket/my_other_group.zarr/C/03'
+--------------------------------------------------------------------------------
 ```
 
 
